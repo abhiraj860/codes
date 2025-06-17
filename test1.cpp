@@ -10,13 +10,14 @@ int32_t main() {
 
     int n;
     cin >> n;
-    cout << n << " ";
-    while (n > 1) {
-        if (n & 1) n = 3 * n + 1;
-        else n /= 2;
-        cout << n << " "; 
-        if (n == 1) break; 
+    int ans = 0;
+    for (int i = 1; i <= n - 1; i++) {
+        int p;
+        cin >> p;
+        ans ^= p; 
+        ans ^= i;
     }
-    // if (n == 1) cout << n;
+    ans ^= n;
+    cout << ans;
     return 0;
 }
