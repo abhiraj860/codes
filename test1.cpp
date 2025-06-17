@@ -2,6 +2,15 @@
 #define int long long int
 using namespace std;
 
+int cntOnes(int num) {
+    int cnt = 0;
+    while(num > 0) {
+        cnt++;
+        num = num & (num - 1);
+    }
+    return cnt;
+}
+
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
@@ -11,13 +20,9 @@ int32_t main() {
     int n;
     cin >> n;
     int ans = 0;
-    for (int i = 1; i <= n - 1; i++) {
-        int p;
-        cin >> p;
-        ans ^= p; 
-        ans ^= i;
+    for(int i = 1; i <= n; i++) {
+        ans += cntOnes(i);
     }
-    ans ^= n;
     cout << ans;
     return 0;
 }
