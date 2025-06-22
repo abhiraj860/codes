@@ -2,28 +2,31 @@
 #define int long long int
 using namespace std;
 
-int getMaxCnt(string & str) {
-    int n = str.length();
-    int ans = INT_MIN;
-    for(int i = 0; i < n; i++) {
-        int cnt = 1;
-        while(i < (n - 1) && str[i] == str[i + 1]) {
-            cnt++;
-            i++;
+int minMoves(vector<int> & vec, int n) {
+    int moves = 0;
+    for(int i = 1; i < n; i++) {
+        if(vec[i] < vec[i - 1]) {
+            int diff = (vec[i - 1] - vec[i]); 
+            moves += diff;
+            vec[i] += diff;
         }
-        ans = max(ans, cnt);
     }
-    return ans;
+    return moves;
 }
-
 
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    string str;
-    cin >> str;
-    cout << getMaxCnt(str) << endl;
+    int n;
+    cin >> n;
+    vector<int> arr;
+    for(int i = 0; i < n; i++) {
+        int curr;
+        cin >> curr;
+        arr.push_back(curr);
+    }
+    cout << minMoves(arr, n) << endl;
     return 0;
 }
