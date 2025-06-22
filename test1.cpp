@@ -2,16 +2,16 @@
 #define int long long int
 using namespace std;
 
+int mod = 10e9 + 7;
 
-bool permute(vector<int> & vec, int n) {
-    if(n == 1) {
-        vec.push_back(n);
-        return true;
+int cntZero(int n) {
+    int denom = 5;
+    int cnt = 0;
+    while((n / denom) > 0) {
+        cnt += (n / denom);
+        denom *= 5;
     }
-    for (int i = 2; i <= n; i += 2) vec.push_back(i);
-    if(vec.back() - 1 <= 1) return false; 
-    for (int i = 1; i <= n; i += 2) vec.push_back(i);
-    return true;
+    return cnt;
 }
 
 int32_t main() {
@@ -21,14 +21,6 @@ int32_t main() {
     #endif
     int n;
     cin >> n;
-    vector<int> vec;
-    
-    bool res = permute(vec, n);
-    
-    if(res) {
-        for (auto x : vec) cout << x << " "; 
-    } else {
-        cout << "NO SOLUTION";
-    }
+    cout << cntZero(n) << endl;
     return 0;
 }
