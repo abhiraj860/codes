@@ -2,14 +2,18 @@
 #define int long long int
 using namespace std;
 
-int ans = 0;
-
-void cntHanoi(int n, vector<pair<int, int>> & vec, int from, int help, int to) {
-    if (n == 0) return;
-    cntHanoi(n - 1, vec, from, to, help);
-    vec.push_back({from, to});
-    ans++;
-    cntHanoi(n - 1, vec, help, from, to);
+int getMaxCnt(string & str) {
+    int n = str.length();
+    int ans = INT_MIN;
+    for(int i = 0; i < n; i++) {
+        int cnt = 1;
+        while(i < (n - 1) && str[i] == str[i + 1]) {
+            cnt++;
+            i++;
+        }
+        ans = max(ans, cnt);
+    }
+    return ans;
 }
 
 
@@ -18,11 +22,8 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int n;
-    vector<pair<int, int>> vec;
-    cin >> n;
-    cntHanoi(n, vec, 1, 2, 3);
-    cout << ans << endl;
-    for(auto p : vec) cout << p.first << " " << p.second << endl; 
+    string str;
+    cin >> str;
+    cout << getMaxCnt(str) << endl;
     return 0;
 }
