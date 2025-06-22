@@ -2,18 +2,6 @@
 #define int long long int
 using namespace std;
 
-int mod = 10e9 + 7;
-
-int cntZero(int n) {
-    int denom = 5;
-    int cnt = 0;
-    while((n / denom) > 0) {
-        cnt += (n / denom);
-        denom *= 5;
-    }
-    return cnt;
-}
-
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
@@ -21,6 +9,13 @@ int32_t main() {
     #endif
     int n;
     cin >> n;
-    cout << cntZero(n) << endl;
+    set<int> st;
+
+    for(int i = 0; i < n; i++) {
+        int p;
+        cin >> p;
+        st.insert(p);
+    }
+    cout << st.size() << endl;
     return 0;
 }
