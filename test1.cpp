@@ -2,16 +2,16 @@
 #define int long long int
 using namespace std;
 
-int minMoves(vector<int> & vec, int n) {
-    int moves = 0;
-    for(int i = 1; i < n; i++) {
-        if(vec[i] < vec[i - 1]) {
-            int diff = (vec[i - 1] - vec[i]); 
-            moves += diff;
-            vec[i] += diff;
-        }
+
+bool permute(vector<int> & vec, int n) {
+    if(n == 1) {
+        vec.push_back(n);
+        return true;
     }
-    return moves;
+    for (int i = 2; i <= n; i += 2) vec.push_back(i);
+    if(vec.back() - 1 <= 1) return false; 
+    for (int i = 1; i <= n; i += 2) vec.push_back(i);
+    return true;
 }
 
 int32_t main() {
@@ -21,12 +21,14 @@ int32_t main() {
     #endif
     int n;
     cin >> n;
-    vector<int> arr;
-    for(int i = 0; i < n; i++) {
-        int curr;
-        cin >> curr;
-        arr.push_back(curr);
+    vector<int> vec;
+    
+    bool res = permute(vec, n);
+    
+    if(res) {
+        for (auto x : vec) cout << x << " "; 
+    } else {
+        cout << "NO SOLUTION";
     }
-    cout << minMoves(arr, n) << endl;
     return 0;
 }
