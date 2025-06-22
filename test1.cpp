@@ -9,13 +9,11 @@ int32_t main() {
     #endif
     int n;
     cin >> n;
-    set<int> st;
-
-    for(int i = 0; i < n; i++) {
-        int p;
-        cin >> p;
-        st.insert(p);
+    int ans = 1;
+    int mod = 1e9 + 7;
+    for (int i = 0; i < n; i++) {
+        ans = ((ans % mod) * 2) % mod;
     }
-    cout << st.size() << endl;
+    cout << ans  << endl;
     return 0;
 }
