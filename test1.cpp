@@ -9,11 +9,7 @@ int32_t main() {
     #endif
     int n;
     cin >> n;
-    int ans = 1;
-    int mod = 1e9 + 7;
-    for (int i = 0; i < n; i++) {
-        ans = ((ans % mod) * 2) % mod;
-    }
-    cout << ans  << endl;
+    if (n & 1) cout << "Odd" << endl;
+    else cout << "Even" << endl;
     return 0;
 }
