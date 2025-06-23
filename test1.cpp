@@ -11,18 +11,34 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    vector<int> arr = {10, 5, 2, 3, -6, 9, 11};
-    int sum = 4;
-    unordered_set<int> st;
-    for(int i = 0; i < arr.size(); i++) {
-        int x = sum - arr[i];
-        if(st.find(x) != st.end()) {
-            cout << x << ", " << arr[i] << endl;
-            st.erase(x);
-            break;
-        } else {
-            st.insert(arr[i]);
+
+    vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 15};
+    int target = 18;
+    vector<vector<int>> result;
+    sort(arr.begin(), arr.end());
+    int n = arr.size();
+    for(int i = 0; i < n - 2; i++) {
+        int left = i + 1;
+        int right = n - 1;
+        while(left < right) {
+            int currentSum = arr[i];
+            currentSum += arr[left];
+            currentSum += arr[right];
+            if(currentSum == target) {
+                result.push_back({arr[i], arr[left], arr[right]});
+                left++;
+                right--;
+            } else if (currentSum < target) {
+                left++;
+            } else {
+                right--;
+            }
         }
     }
+
+    for(auto x : result) {
+        cout << x[0] << " , " << x[1] << " , " << x[2] << endl;
+    }
+
     return 0;
 }
