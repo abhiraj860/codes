@@ -11,14 +11,15 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    vector<int> arr = {2, 1, 8, 6, -2, 5, 3, 0};
-    unordered_set<int>st; 
-    int sum = 8;
+    vector<int> arr = {10, 5, 2, 3, -6, 9, 11};
+    int sum = 4;
+    unordered_set<int> st;
     for(int i = 0; i < arr.size(); i++) {
         int x = sum - arr[i];
         if(st.find(x) != st.end()) {
             cout << x << ", " << arr[i] << endl;
             st.erase(x);
+            break;
         } else {
             st.insert(arr[i]);
         }
