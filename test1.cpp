@@ -11,20 +11,15 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    vector<int> arr = {1, 2, 3, 4, 5};
+    vector<int> arr = {-1, 2, 3, 4, -2, 6, -8, 3};
+    int ms = INT_MIN;
+    int cs = 0;
+    for(auto x : arr) {
+        cs += x;
+        ms = max(ms, cs);
+        if(cs < 0) cs = 0;
+    }
+    cout << ms << endl;
 
-    int temp = 1;
-    int n = arr.size();
-    vector<int> output(n, 1);
-    for(int i = 0; i < n; i++) {
-        output[i] = temp;
-        temp *= arr[i];
-    }
-    temp = 1;
-    for(int i = n - 1; i >= 0; i--) {
-        output[i] *= temp;
-        temp *= arr[i];
-    }
-    for(auto x : output) cout << x << endl;
     return 0;
 }
