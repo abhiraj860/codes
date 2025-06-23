@@ -11,16 +11,20 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    vector<pair<int, int>> inp = {{7, 9}, {0, 10}, {4, 5}, {8, 9}, {4, 10},{5, 7}};
-    sort(inp.begin(), inp.end(), compare);
-    int end = inp[0].second;
-    int cnt = 1;
-    for(int i = 1; i < inp.size(); i++) {
-        if (inp[i].first >= end) {
-            cnt++;
-            end = inp[i].second;
-        }
+    vector<int> arr = {1, 2, 3, 4, 5};
+
+    int temp = 1;
+    int n = arr.size();
+    vector<int> output(n, 1);
+    for(int i = 0; i < n; i++) {
+        output[i] = temp;
+        temp *= arr[i];
     }
-    cout << cnt << endl;
+    temp = 1;
+    for(int i = n - 1; i >= 0; i--) {
+        output[i] *= temp;
+        temp *= arr[i];
+    }
+    for(auto x : output) cout << x << endl;
     return 0;
 }
