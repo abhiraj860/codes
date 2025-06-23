@@ -11,16 +11,16 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int n = 15;
-    for (int i = 1; i <= 15; i++) {
-        if(i % 15 == 0) {
-            cout << "FizzBuzz" << endl;
-        } else if (i % 5 == 0) {
-            cout << "Buzz" << endl;
-        } else if (i % 3 == 0) {
-            cout << "Fizz" << endl;
+    vector<int> arr = {2, 1, 8, 6, -2, 5, 3, 0};
+    unordered_set<int>st; 
+    int sum = 8;
+    for(int i = 0; i < arr.size(); i++) {
+        int x = sum - arr[i];
+        if(st.find(x) != st.end()) {
+            cout << x << ", " << arr[i] << endl;
+            st.erase(x);
         } else {
-            cout << to_string(i) << endl;
+            st.insert(arr[i]);
         }
     }
     return 0;
