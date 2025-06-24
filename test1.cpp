@@ -8,26 +8,17 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    int n;
-    cin >> n;
-    int res = n * (n + 1) / 2;
-    if(res & 1) {
-        cout << "NO" << endl;
-    } else {
-        int reqSum = res / 2;
-        vector<int> a;
-        vector<int> b;
-        for(int i = n; i >= 1; i--) {
-            if(reqSum - i >= 0) a.push_back(i), reqSum = reqSum - i;
-            else  b.push_back(i);
+    int t;
+    cin >> t;
+    while(t--) {
+        int a, b;
+        cin >> a >> b;
+        if(((a + b) % 3 == 0) && (2 * min(a, b) >= max(a, b))) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
         }
-        cout << "YES" << endl;
-        cout << a.size() << endl;
-        for(auto x:a) cout << x << " ";
-        cout << endl;
-        cout << b.size() << endl;
-        for(auto x:b) cout << x << " ";
-    }   
+    }
 
     return 0;
 }
