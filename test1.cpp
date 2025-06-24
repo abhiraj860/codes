@@ -10,20 +10,14 @@ int32_t main() {
 
     int n;
     cin >> n;
-    
-    for(int i = 1; i <= n; i++) {
-        if(i == 1) {
-            cout << 0 << endl;
-        } else if (i == 2) {
-            cout << 6 << endl;
-        } else {
-            int n = i;
-            int totWays = (n * n) * (n * n - 1) / 2;
-            int notWays = 4 * (n - 1) * (n - 2);
-            int reqdWays = totWays - notWays;
-            cout << reqdWays << endl;
-        }
+    vector<string> temp = {"0", "1"};
+    while(n > 1) {
+        vector<string> temp1 = temp;
+        for(int i = 0; i < temp.size(); i++) temp[i] = "0" + temp[i];
+        reverse(temp1.begin(), temp1.end());
+        for(int i = 0; i < temp1.size(); i++) temp1[i] = "1" + temp1[i], temp.push_back(temp1[i]);
+        n--;
     }
-
+    for(auto x : temp) cout << x << endl;
     return 0;
 }
