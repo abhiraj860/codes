@@ -8,15 +8,20 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    int t;
-    cin >> t;
-    while(t--) {
-        int a, b;
-        cin >> a >> b;
-        if(((a + b) % 3 == 0) && (2 * min(a, b) >= max(a, b))) {
-            cout << "YES" << endl;
+    int n;
+    cin >> n;
+    
+    for(int i = 1; i <= n; i++) {
+        if(i == 1) {
+            cout << 0 << endl;
+        } else if (i == 2) {
+            cout << 6 << endl;
         } else {
-            cout << "NO" << endl;
+            int n = i;
+            int totWays = (n * n) * (n * n - 1) / 2;
+            int notWays = 4 * (n - 1) * (n - 2);
+            int reqdWays = totWays - notWays;
+            cout << reqdWays << endl;
         }
     }
 
