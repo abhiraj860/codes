@@ -2,43 +2,32 @@
 #define int long long int
 using namespace std;
 
-bool compare(pair<int, int> a, pair<int, int> b) {
-    return a.second < b.second;
-}
-
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
 
-    vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 15};
-    int target = 18;
-    vector<vector<int>> result;
-    sort(arr.begin(), arr.end());
-    int n = arr.size();
-    for(int i = 0; i < n - 2; i++) {
-        int left = i + 1;
-        int right = n - 1;
-        while(left < right) {
-            int currentSum = arr[i];
-            currentSum += arr[left];
-            currentSum += arr[right];
-            if(currentSum == target) {
-                result.push_back({arr[i], arr[left], arr[right]});
-                left++;
-                right--;
-            } else if (currentSum < target) {
-                left++;
-            } else {
-                right--;
-            }
+    int n;
+    cin >> n;
+    int res = n * (n + 1) / 2;
+    if(res & 1) {
+        cout << "NO" << endl;
+    } else {
+        int reqSum = res / 2;
+        vector<int> a;
+        vector<int> b;
+        for(int i = n; i >= 1; i--) {
+            if(reqSum - i >= 0) a.push_back(i), reqSum = reqSum - i;
+            else  b.push_back(i);
         }
-    }
-
-    for(auto x : result) {
-        cout << x[0] << " , " << x[1] << " , " << x[2] << endl;
-    }
+        cout << "YES" << endl;
+        cout << a.size() << endl;
+        for(auto x:a) cout << x << " ";
+        cout << endl;
+        cout << b.size() << endl;
+        for(auto x:b) cout << x << " ";
+    }   
 
     return 0;
 }
