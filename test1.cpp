@@ -2,29 +2,39 @@
 #define int long long int
 using namespace std;
 
+void placeChar(string & output, char x, int n) {
+    for(int i = 0; i < n; i++) output += x; 
+    return;
+}
+
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
 
-    vector<int> arr = {1, 9, 3, 0, 18, 5, 2, 4, 10, 7, 12, 6};
-    unordered_set<int> st;
-    for(auto x : arr) st.insert(x);
-    int largest = 1;
-    for(auto x : st) {
-        int parent = x - 1;
-        if(st.find(parent) == st.end()) {
-            int currentLen = 0;
-            int current = x;
-            while(st.find(current) != st.end()) {
-                currentLen++;
-                current++;
-            }
-            largest = max(largest, currentLen);
-        }
+    string str;
+    cin >> str;
+    int n = str.size();
+    string output = "";
+    
+    unordered_map<char, int> mp;
+    for(auto x : str) mp[x]++;
+    int oddCount = 0;
+    char oddChar;
+    for(auto x : mp) {
+        if(x.second & 1) oddCount++, oddChar = x.first;
+    } 
+    if(oddCount <= 1) {
+        for(auto x:mp) placeChar(output, x.first, x.second / 2);
+            string temp = output;
+            reverse(output.begin(), output.end());
+            if(oddCount == 1) output += oddChar;
+            output += temp;
+            cout << output << endl; 
+        
+    } else {
+        cout << "NO SOLUTION" << endl;
     }
-    cout << largest << endl;
-
     return 0;
 }
