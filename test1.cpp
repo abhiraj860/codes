@@ -8,16 +8,23 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    int n;
-    cin >> n;
-    vector<string> temp = {"0", "1"};
-    while(n > 1) {
-        vector<string> temp1 = temp;
-        for(int i = 0; i < temp.size(); i++) temp[i] = "0" + temp[i];
-        reverse(temp1.begin(), temp1.end());
-        for(int i = 0; i < temp1.size(); i++) temp1[i] = "1" + temp1[i], temp.push_back(temp1[i]);
-        n--;
+    vector<int> arr = {1, 9, 3, 0, 18, 5, 2, 4, 10, 7, 12, 6};
+    unordered_set<int> st;
+    for(auto x : arr) st.insert(x);
+    int largest = 1;
+    for(auto x : st) {
+        int parent = x - 1;
+        if(st.find(parent) == st.end()) {
+            int currentLen = 0;
+            int current = x;
+            while(st.find(current) != st.end()) {
+                currentLen++;
+                current++;
+            }
+            largest = max(largest, currentLen);
+        }
     }
-    for(auto x : temp) cout << x << endl;
+    cout << largest << endl;
+
     return 0;
 }
