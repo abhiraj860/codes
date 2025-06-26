@@ -13,28 +13,31 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    string str;
-    cin >> str;
-    int n = str.size();
-    string output = "";
-    
-    unordered_map<char, int> mp;
-    for(auto x : str) mp[x]++;
-    int oddCount = 0;
-    char oddChar;
-    for(auto x : mp) {
-        if(x.second & 1) oddCount++, oddChar = x.first;
-    } 
-    if(oddCount <= 1) {
-        for(auto x:mp) placeChar(output, x.first, x.second / 2);
-            string temp = output;
-            reverse(output.begin(), output.end());
-            if(oddCount == 1) output += oddChar;
-            output += temp;
-            cout << output << endl; 
-        
-    } else {
-        cout << "NO SOLUTION" << endl;
+    int n, targetSum;
+    cin >> n >> targetSum;
+    vector<pair<int, int>> arr;
+    for(int i = 0; i < n; i++) {
+        int p;
+        cin >> p;
+        arr.push_back({p, i + 1});
     }
+    sort(arr.begin(), arr.end());
+    int i = 0;
+    int j = n - 1;
+    bool found = false;
+    while(i < j) {
+        int first = arr[i].first;
+        int second = arr[j].first;
+        if(first + second == targetSum) {
+            cout << arr[i].second << " " << arr[j].second << endl;
+            found = true;
+            break;
+        } else if (first + second < targetSum) {
+            i++;
+        } else {
+            j--;
+        }
+    }
+    if(!found) cout << "IMPOSSIBLE" << endl; 
     return 0;
 }
