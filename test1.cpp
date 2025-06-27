@@ -2,10 +2,15 @@
 #define int long long int
 using namespace std;
 
-void placeChar(string & output, char x, int n) {
-    for(int i = 0; i < n; i++) output += x; 
-    return;
-}
+ int fastExponentiation(int a, int n) {
+        int ans = 1;
+        while(n > 0) {
+            if(n & 1) ans = ans * a;
+            a = a * a;
+            n = n >> 1;
+        }
+        return ans;
+    }
 
 int32_t main() {
     #ifndef ONLINE_JUDGE
@@ -13,31 +18,10 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    int n, targetSum;
-    cin >> n >> targetSum;
-    vector<pair<int, int>> arr;
-    for(int i = 0; i < n; i++) {
-        int p;
-        cin >> p;
-        arr.push_back({p, i + 1});
-    }
-    sort(arr.begin(), arr.end());
-    int i = 0;
-    int j = n - 1;
-    bool found = false;
-    while(i < j) {
-        int first = arr[i].first;
-        int second = arr[j].first;
-        if(first + second == targetSum) {
-            cout << arr[i].second << " " << arr[j].second << endl;
-            found = true;
-            break;
-        } else if (first + second < targetSum) {
-            i++;
-        } else {
-            j--;
-        }
-    }
-    if(!found) cout << "IMPOSSIBLE" << endl; 
+    int a;
+    cin >> a;
+    int n;
+    cin >> n;
+    cout << fastExponentiation(a, n) << endl;
     return 0;
 }
