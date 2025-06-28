@@ -2,22 +2,24 @@
 #define int long long int
 using namespace std;
 
-int countingSetBits(int n) {
-    int ans = 0;
-    while(n > 0) {
-        if(n & 1) ans++;
-        n = n >> 1;
+void printSubSet(string str, int i) {
+    string out = "";
+    int j = 0;
+    while(i > 0) {
+        if(i & 1) out += str[j];
+        i = i >> 1;
+        j++; 
     }
-    return ans;
+    cout << out << endl;
+    return;
 }
 
-int countingSetBitsN(int n) {
-    int ans = 0;
-    while (n > 0) {
-        n = n & (n - 1);
-        ans++;
+void findingSubsets(string str) {
+    int n = str.length();
+    for(int i = 0; i <= ((1 << n) - 1); i++) {
+        printSubSet(str, i);
     }
-    return ans;
+    return;
 }
 
 int32_t main() {
@@ -25,8 +27,8 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int n;
-    cin >> n;
-    cout << countingSetBitsN(n) << endl;
+    string str;
+    cin >> str;
+    findingSubsets(str);
     return 0;
 }
