@@ -1,1 +1,1 @@
-10
+Not a power of two

@@ -2,10 +2,9 @@
 #define int long long int
 using namespace std;
 
-int findUnique(vector<int> & arr) {
-    int ans = 0;
-    for(auto x : arr) ans ^= x;  
-    return ans;
+string twoPower(int n) {
+    if((n & (n - 1)) == 0) return "Power of Two";
+    return "Not a power of two";
 }
 
 int32_t main() {
@@ -13,7 +12,8 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    vector<int> arr = {1, 3, 5, 4, 3, 1, 5, 4, 10};
-    cout << findUnique(arr) << endl;
+    int n;
+    cin >> n;
+    cout << twoPower(n) << endl;
     return 0;
 }
