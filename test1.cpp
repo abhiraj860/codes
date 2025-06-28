@@ -2,9 +2,13 @@
 #define int long long int
 using namespace std;
 
-string twoPower(int n) {
-    if((n & (n - 1)) == 0) return "Power of Two";
-    return "Not a power of two";
+int earthLevels(int n) {
+    int ans = 0;
+    while (n > 0) {
+        ans++;
+        n = n & (n - 1);
+    }
+    return ans;
 }
 
 int32_t main() {
@@ -14,6 +18,6 @@ int32_t main() {
     #endif
     int n;
     cin >> n;
-    cout << twoPower(n) << endl;
+    cout << earthLevels(n) << endl;
     return 0;
 }
