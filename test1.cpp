@@ -2,13 +2,17 @@
 #define int long long int
 using namespace std;
 
-int earthLevels(int n) {
-    int ans = 0;
-    while (n > 0) {
-        ans++;
-        n = n & (n - 1);
+void permute(string & str, int i) {
+    if(i == str.size()) {
+        cout << str << endl;
+        return;
+    } 
+    for(int j = i; j < str.size(); j++) {
+        swap(str[i], str[j]);
+        permute(str, i + 1);
+        swap(str[i], str[j]);
     }
-    return ans;
+    return;
 }
 
 int32_t main() {
@@ -16,8 +20,8 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int n;
-    cin >> n;
-    cout << earthLevels(n) << endl;
+    string str = "abcd";
+    permute(str, 0);
+
     return 0;
 }
