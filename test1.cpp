@@ -2,28 +2,29 @@
 #define int long long int
 using namespace std;
 
-void sortPermute(string str, int i, set<string> & st) {
-    if(i == str.size()) {
-        st.insert(str);
-        return;
-    } 
-    for(int j = i; j < str.size(); j++) {
-        swap(str[i], str[j]);
-        sortPermute(str, i + 1, st);
-        swap(str[i], str[j]);
+int mod = 1e9 + 7;
+
+int powerModulo(int a, int b) {
+    if(a == 0) return 0;
+    if(b == 0) return 1;
+    int ans = 1;
+    if(b & 1) {
+        ans = ((a % mod) * powerModulo(a, b - 1)) % mod;
+    } else {
+        ans = ((powerModulo(a, b / 2) % mod) * (powerModulo(a, b / 2) % mod)) % mod;
     }
-    return;
+    return ans;
 }
+
 
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    
-    string str = "acb";
-    set<string> st;
-    sortPermute(str, 0, st);
-    for(auto x : st) cout << x << endl; 
+
+    int a, b;
+    cin >> a >> b;
+    cout << powerModulo(a, b) << endl;
     return 0;
 }

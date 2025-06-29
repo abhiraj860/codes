@@ -1,6 +1,1 @@
-abc
-acb
-bac
-bca
-cab
-cba
+3125
