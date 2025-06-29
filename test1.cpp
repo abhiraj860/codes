@@ -2,18 +2,17 @@
 #define int long long int
 using namespace std;
 
-int mod = 1e9 + 7;
-
-int powerModulo(int a, int b) {
-    if(a == 0) return 0;
-    if(b == 0) return 1;
-    int ans = 1;
-    if(b & 1) {
-        ans = ((a % mod) * powerModulo(a, b - 1)) % mod;
-    } else {
-        ans = ((powerModulo(a, b / 2) % mod) * (powerModulo(a, b / 2) % mod)) % mod;
+void permute(string & str, int i, set<string> & st) {
+    if(i == str.size()) {
+        st.insert(str);
+        return;
     }
-    return ans;
+    for(int j = i; j < str.size(); j++) {
+        swap(str[i], str[j]);
+        permute(str, i + 1, st);
+        swap(str[i], str[j]);
+    }   
+    return;
 }
 
 
@@ -23,8 +22,12 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    int a, b;
-    cin >> a >> b;
-    cout << powerModulo(a, b) << endl;
+    string str;
+    cin >> str;
+    set<string> st;
+    permute(str, 0, st);
+    cout << st.size() << endl;
+    for(auto x: st) cout << x << endl;
+
     return 0;
 }
