@@ -2,14 +2,14 @@
 #define int long long int
 using namespace std;
 
-void permute(string & str, int i) {
+void sortPermute(string str, int i, set<string> & st) {
     if(i == str.size()) {
-        cout << str << endl;
+        st.insert(str);
         return;
     } 
     for(int j = i; j < str.size(); j++) {
         swap(str[i], str[j]);
-        permute(str, i + 1);
+        sortPermute(str, i + 1, st);
         swap(str[i], str[j]);
     }
     return;
@@ -20,8 +20,10 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    string str = "abcd";
-    permute(str, 0);
-
+    
+    string str = "acb";
+    set<string> st;
+    sortPermute(str, 0, st);
+    for(auto x : st) cout << x << endl; 
     return 0;
 }
