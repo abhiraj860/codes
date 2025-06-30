@@ -2,9 +2,15 @@
 #define int long long int
 using namespace std;
 
-int factorial(int n) {
-    if(n == 0) return 1;
-    return n * factorial(n - 1); 
+int fibonacci(int n) {
+    if(n == 0 || n == 1) {
+        // cout << n << endl;
+        return n;
+    } 
+    
+    int ans = fibonacci(n - 1) + fibonacci(n - 2);  
+    // cout << ans << endl;
+    return ans;
 }
 
 int32_t main() {
@@ -14,6 +20,6 @@ int32_t main() {
     #endif
     int n;
     cin >> n;
-    cout << factorial(n) << endl;
+    cout << fibonacci(n) << endl;
     return 0;
 }
