@@ -2,18 +2,19 @@
 #define int long long int
 using namespace std;
 
-int spiralNumber(int row, int col, int spiralNum) {
-    if(row == 1 && col == 1) return 1;
-    int start = (spiralNum - 1) * (spiralNum - 1) + 1;
-    int end = spiralNum * spiralNum;
-
-    if(spiralNum & 1) {
-        if(row == spiralNum) return start + (col - 1);
-        else return end - (row - 1);    
-    } else {
-        if(row == spiralNum) return end - (col - 1);
-        else return start + (row - 1);
-    }
+int binarySearch(vector<int> & arr, int key) {
+    int s = 0;
+    int e = arr.size() - 1;
+    while(s <= e) {
+        int mid = ((s + e) >> 1);
+        if(arr[mid] == key) {
+            return mid;
+        } else if (arr[mid] < key) {
+            s = mid + 1;
+        } else {
+            e = mid - 1;
+        }
+    }    
     return -1;
 }
 
@@ -22,13 +23,8 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int t;
-    cin >> t;
-    while(t--) {
-        int row, col;
-        cin >> row >> col;
-        int spiralNum = max(row, col);
-        cout << spiralNumber(row, col, spiralNum) << endl;
-    }    
+    vector<int> arr = {2, 9, 10, 15, 18, 19, 20, 24};
+    int key = 20;
+    cout << binarySearch(arr, key) << endl;
     return 0;
 }
