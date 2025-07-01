@@ -2,30 +2,39 @@
 #define int long long int
 using namespace std;
 
+int merge(vector<int> & arr, int s, int e) {
+    int i = s;
+    int m = (s + e) >> 1;
+    int j = m + 1;
+    int ans = 0;
+    vector<int> temp;
+    while(i <= m && j <= e) {
+        if(arr[i] <= arr[j]) temp.push_back(arr[i]), i++;
+        else temp.push_back(arr[j]), j++, ans += (m - i + 1); 
+    }
+    while(i <= m) temp.push_back(arr[i]), i++;
+    while(j <= e) temp.push_back(arr[j]), j++;
+    int k = s;
+    for(auto x: temp) arr[k] = x, k++;
+    return ans; 
+}
+
+int mergeSort(vector<int> & arr, int s, int e) {
+    if(s == e) return 0;
+    int mid = (s + e) >> 1;
+    int ans = mergeSort(arr, s, mid);
+    ans += mergeSort(arr, mid + 1, e);
+    ans += merge(arr, s, e);
+    return ans;
+}
 
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int n;
-    cin >> n;
-    vector<vector<int>> arr(n, vector<int>(n, 0));
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            set<int> st;
-            for(int k = 0; k < j; k++) st.insert(arr[i][k]);
-            for(int k = i - 1; k >= 0; k--) st.insert(arr[k][j]);
-            int mex = 0;
-            while(st.find(mex) != st.end()) mex++;
-            arr[i][j] = mex;
-        }
-    }
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            cout << arr[i][j] << " ";
-        }
-        cout << endl;
-    }
+    vector<int> arr = {0, 5, 2, 3, 1, 0, 0};
+    int e = arr.size() - 1;
+    cout << mergeSort(arr, 0, e) << endl;
     return 0;
 }
