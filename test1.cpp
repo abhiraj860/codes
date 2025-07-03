@@ -2,15 +2,13 @@
 #define int long long int
 using namespace std;
 
-pair<int, int> search(int row, int col, vector<vector<int>> & arr, int val) {
-    int m = row - 1;
-    int n = 0;
-    while(m >= 0 && n < col) {
-        if(arr[m][n] == val) return {m, n};
-        else if (arr[m][n] < val) n++;
-        else m--;
-    }
-    return {-1, -1};
+int powerFunc(int a, int n) {
+    if(a == 0) return 0;
+    if(n == 0) return 1;
+    int ans;
+    if(n & 1) ans = a * powerFunc(a, n / 2) * powerFunc(a, n/2);
+    else ans = powerFunc(a, n/2) * powerFunc(a, n/2);
+    return ans;
 }
 
 int32_t main() {
@@ -18,10 +16,8 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int row = 3;
-    int col = 3;
-    vector<vector<int>> arr {{1,4,9},{2,5,10},{6,7,11}};
-    pair<int, int> p = search(row, col, arr, 9);
-    cout << p.first  << " " << p.second << endl;
+    int a, n;
+    cin >> a >> n;
+    cout << powerFunc(a, n) << endl;
     return 0;
 }
