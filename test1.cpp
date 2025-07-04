@@ -2,28 +2,21 @@
 #define int long long int
 using namespace std;
 
-void printSet(set<char> & st) {
-    for(auto x: st) cout << x;
-    cout << endl;
-    return;
-}
-
 bool changeMatrix(vector<vector<char>> & matrix, int row, int col) {
-    int dx[4] = {0,1, 0,-1};
-    int dy[4] = {1,0,-1, 0};
+    int dx[2] = { 0,-1};
+    int dy[2] = {-1, 0};
     for(int i = 0; i < row; i++) {
         for(int j = 0; j < col; j++) {
             set<char> st = {'A', 'B', 'C', 'D'};
             st.erase(matrix[i][j]);
-            printSet(st);
-            for(int m = 0; m < 4; m++) {
+            for(int m = 0; m < 2; m++) {
                 int nx = i + dy[m];
                 int ny = j + dx[m];
                 if(nx >= 0 && ny >= 0 && ny < col && nx < row) {
-                    if(st.find(matrix[nx][ny]) != st.end()) st.erase(matrix[nx][ny]);
-                    if(st.size() == 0) return false;
-                    else matrix[i][j] = *st.begin(); 
+                    if(st.find(matrix[nx][ny]) != st.end()) st.erase(matrix[nx][ny]); 
                 }
+                if(st.size() == 0) return false;
+                else matrix[i][j] = *st.begin();
             }
         }
     }
