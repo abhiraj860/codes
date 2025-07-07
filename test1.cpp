@@ -2,23 +2,19 @@
 #define int long long int
 using namespace std;
 
-int pivot(vector<int> & arr, int s, int e) {
-    int i = s - 1;
-    int p = arr[e];
-    for(int j = s; j <= e - 1; j++) {
-        if(arr[j] < p) i++, swap(arr[j], arr[i]);
+int getCount(vector<int> & arr, int p) {
+    int cnt = 0;
+    int i = 0;
+    int j = arr.size() - 1;
+    while(i < j) {
+        int curr = 0;
+        while(curr <= p) {
+            curr += arr[j];
+            curr += arr[j];
+        }
     }
-    swap(arr[i + 1], arr[e]);
-    return i + 1;
 }
 
-int quickSort (vector<int> & arr, int s, int e, int k) {
-    int p = pivot(arr, s, e);
-    if(p == k) return arr[p];
-    else if (k < p) return quickSort(arr, s, p - 1, k);
-    else return quickSort(arr, p + 1, e, k); 
-    return -1;
-}
 
 
 int32_t main() {
@@ -26,9 +22,17 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    vector<int> arr = {10, 5, 2, 0, 7, 6, 4};
-    int n = arr.size();
-    int k = 0;
-    cout << quickSort(arr, 0, n - 1, k) << endl;
+
+    int n, p;
+    cin >> n >> p;
+    vector<int>arr;
+    for(int i = 0; i < n; i++) {
+        int a;
+        cin >> a;
+        arr.push_back(a);
+    }
+    sort(arr.begin(), arr.end());
+    int cnt = getCount(arr, p);
+    cout << cnt << endl;
     return 0;
 }
