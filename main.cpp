@@ -2,21 +2,29 @@
 #define int long long int
 using namespace std;
 
+bool compare(pair<int, int> a, pair<int, int> b) {
+    return a.second < b.second;
+}
+
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
 
-    vector<int> arr;
-    int n;
-    cin >> n;
-    for(int i = 0; i < n; i++) {
-        int p;
-        cin >> p;
-        arr.push_back(p);
-    } 
-    for(auto x:arr) cout << x << endl;
-
+    int t;
+    cin >> t;
+    vector<pair<int, int>> arr;
+    while(t--) {
+        int a, b;
+        cin >> a >> b;
+        arr.push_back({a, b});
+    }
+    sort(arr.begin(), arr.end(), compare);
+    int act = 1;
+    for(int i = 1; i < arr.size(); i++) {
+        if(arr[i].first >= arr[i - 1].second) act++; 
+    }
+    cout << act << endl;
     return 0;
 }
