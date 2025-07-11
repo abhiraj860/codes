@@ -8,7 +8,7 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    
+    cout << "C++" << endl;
 
     return 0;
 }
