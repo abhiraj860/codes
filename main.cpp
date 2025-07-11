@@ -8,7 +8,15 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    cout << "C++" << endl;
+    vector<int> arr;
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++) {
+        int p;
+        cin >> p;
+        arr.push_back(p);
+    } 
+    for(auto x:arr) cout << x << endl;
 
     return 0;
 }
