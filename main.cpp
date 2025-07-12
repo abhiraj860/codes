@@ -22,8 +22,9 @@ int32_t main() {
     }
     sort(arr.begin(), arr.end(), compare);
     int act = 1;
+    int end = arr[0].second;
     for(int i = 1; i < arr.size(); i++) {
-        if(arr[i].first >= arr[i - 1].second) act++; 
+        if(arr[i].first >= end) act++, end = arr[i].second; 
     }
     cout << act << endl;
     return 0;
