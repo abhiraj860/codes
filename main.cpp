@@ -2,8 +2,26 @@
 #define int long long int
 using namespace std;
 
-bool compare(pair<int, int> a, pair<int, int> b) {
-    return a.second < b.second;
+void fourSum(vector<pair<int, int>> & arr, int sums) {
+    int n = arr.size();
+    // cout << "currSum" << endl;
+    for(int i = 0; i <= n - 4; i++) {
+        for(int j = i + 1; j <= n - 3; j++) {
+            int k = j + 1;
+            int l = n - 1;
+            while(k < l) {
+                int currSum = arr[i].first + arr[j].first + arr[k].first + arr[l].first;
+                if(currSum == sums) {
+                    cout << arr[i].second << " " << arr[j].second << " " << arr[k].second << " " << arr[l].second;
+                    return;
+                } else if(currSum < sums) k++;
+                else l--;
+                
+            } 
+        }
+    }
+    cout << "IMPOSSIBLE" << endl;
+    return;
 }
 
 int32_t main() {
@@ -11,21 +29,17 @@ int32_t main() {
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-
-    int t;
-    cin >> t;
+    int n;
+    int sums;
+    cin >> n >> sums;
     vector<pair<int, int>> arr;
-    while(t--) {
-        int a, b;
-        cin >> a >> b;
-        arr.push_back({a, b});
+    for(int i = 0; i < n; i++) {
+        int inp;
+        cin >> inp;
+        arr.push_back({inp, i + 1});
     }
-    sort(arr.begin(), arr.end(), compare);
-    int act = 1;
-    int end = arr[0].second;
-    for(int i = 1; i < arr.size(); i++) {
-        if(arr[i].first >= end) act++, end = arr[i].second; 
-    }
-    cout << act << endl;
+    sort(arr.begin(), arr.end());
+    fourSum(arr, sums);    
+
     return 0;
 }
