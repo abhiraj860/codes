@@ -2,39 +2,35 @@
 #define int long long int
 using namespace std;
 
-void findPair(int n, int a, int b) {
-    if(a + b > n) {
-        cout << "NO" << endl; 
-        return;
-    } 
-    if(a == 0 && b >= 1) {
-        cout << "NO" << endl;
-        return;
+void printMat(vector<vector<int>> & arr) {
+    int row = arr.size();
+    int col = arr[0].size();
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < col; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
     }
-    if(b == 0 && a >= 1) {
-        cout << "NO" << endl;
-        return;
+    return;
+}
+
+void findCount(vector<vector<int>> & arr, int row, int col) {
+    queue<pair<int, int>> que;
+    que.push({0, 0});
+    while(!que.empty()) {
+        int x = que.front().first;
+        int y = que.front().second;
+        que.pop();
+        int dx[] = { 2, 2, -2, -2, -1, 1, 1, -1};
+        int dy[] = {-1, 1, -1,  1, -2, -2, 2, 2};
+        for(int i = 0; i < 8; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if(nx >= 0 && nx < col && ny >= 0 && ny < row) {
+                if(arr[nx][ny] == -1) arr[nx][ny] = arr[x][y] + 1, que.push({nx, ny});
+            }
+        }
     }
-    vector<int>resA;
-    vector<int> resB;
-    int ties = n - (a + b);
-    for(int i = 1; i <= ties; i++) {
-        resA.push_back(i);
-        resB.push_back(i);
-    } 
-    if(a > 0) {
-        for(int i = n; i > (n - a); i--) resA.push_back(i);
-        for(int i = ties + a; i >= ties + 1; i--) resB.push_back(i); 
-    }
-    if(b > 0) {
-        for(int i = ties + b; i >= ties + 1; i--) resA.push_back(i);
-        for(int i = n; i > ties + a; i--) resB.push_back(i);
-    }
-    cout << "YES" << endl;
-    for(auto x : resA) cout << x << " ";
-    cout << endl;
-    for(auto x : resB) cout << x << " ";
-    cout << endl; 
     return;
 }
 
@@ -44,12 +40,11 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    int t;
-    cin >> t;
-    while(t--) {
-        int n, a, b;
-        cin >> n >> a >> b;
-        findPair(n, a, b);
-    }
+    int n;
+    cin >> n;
+    vector<vector<int>> arr(n, vector<int>(n, -1));
+    arr[0][0] = 0;
+    findCount(arr, n, n);
+    printMat(arr);
     return 0;
 }
