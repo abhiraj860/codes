@@ -2,44 +2,69 @@
 #define int long long int
 using namespace std;
 
-void fourSum(vector<pair<int, int>> & arr, int sums) {
-    int n = arr.size();
-    // cout << "currSum" << endl;
-    for(int i = 0; i <= n - 4; i++) {
-        for(int j = i + 1; j <= n - 3; j++) {
-            int k = j + 1;
-            int l = n - 1;
-            while(k < l) {
-                int currSum = arr[i].first + arr[j].first + arr[k].first + arr[l].first;
-                if(currSum == sums) {
-                    cout << arr[i].second << " " << arr[j].second << " " << arr[k].second << " " << arr[l].second;
-                    return;
-                } else if(currSum < sums) k++;
-                else l--;
-                
-            } 
+// void printNQueen(vector<vector<char>> & arr) {
+//     for(int i = 0; i < 8; i++) {
+//         for(int j = 0; j < 8; j++) {
+//             cout << arr[i][j];
+//         }
+//         cout << endl;
+//     }
+//     return;
+// }
+
+bool validPos(int row, int col, vector<vector<char>> & arr) {
+    int i = row;
+    int j = col;
+    for(int k = 0; k < i; k++) {
+        if(arr[k][col] == 'Q') return false;
+    }
+    while(i >= 0 && j>= 0) {
+        if(arr[i][j] == 'Q') return false;
+        i--;
+        j--;
+    }
+    i = row;
+    j = col;
+    while(i >= 0 && j < 8) {
+        if(arr[i][j] == 'Q') return false;
+        i--;
+        j++;
+    }
+    return true;
+}
+
+void nQueenProb(int row, int col, vector<vector<char>> & arr, int tot, int & cnt) {
+    if(row >= tot) {
+        cnt++;
+        return;
+    } 
+   
+    for(int col = 0; col < tot; col++) {
+        if(arr[row][col] == '.') {
+            if(validPos(row, col, arr)) {
+                arr[row][col] = 'Q';
+                nQueenProb(row + 1, 0, arr, tot, cnt);
+                arr[row][col] = '.'; 
+            }
         }
     }
-    cout << "IMPOSSIBLE" << endl;
     return;
 }
+
 
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
-    int n;
-    int sums;
-    cin >> n >> sums;
-    vector<pair<int, int>> arr;
-    for(int i = 0; i < n; i++) {
-        int inp;
-        cin >> inp;
-        arr.push_back({inp, i + 1});
+    vector<vector<char>> arr(8, vector<char>(8));
+    for(int i = 0; i < 8; i++) {
+        for(int j = 0; j < 8; j++) {
+            cin >> arr[i][j];
+        }
     }
-    sort(arr.begin(), arr.end());
-    fourSum(arr, sums);    
-
+    int cnt = 0;
+    nQueenProb(0, 0, arr, 8, cnt);
+    cout << cnt << endl;
     return 0;
 }
