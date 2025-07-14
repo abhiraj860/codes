@@ -3,18 +3,52 @@
 using namespace std;
 
 int32_t main() {
-    int n;
-    cin >> n;
-    int ms = INT_MIN;
-    int cs = 0;
-    cout << n << endl;
-    for(int i = 0; i < n; i++) {
-        int p;
-        cin >> p;
-        cs += p;
-        ms = max(ms, cs);
-        if(cs < 0) cs = 0;
-    }
-    cout << ms << endl;
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+
+    string str;
+    cin >> str;
+    int n = str.size();
+    map<char, int> mp;
+    for(auto x: str) mp[x]++;
+    int maxRepeat = 1;
+    string output;
+    for(auto x: mp) maxRepeat = max(maxRepeat, x.second);
+    if(maxRepeat > ((n + 1 )/ 2)) cout << -1 << endl;
+    else {
+        priority_queue<pair<char, int>, vector<pair<char, int>>, greater<pair<char, int>>> pq;
+        for(auto x: mp) pq.push(x);
+        while(!pq.empty()) {
+            pair<char, int> f = pq.top();
+            pq.pop();
+            if(output.size() == 0) {
+                output += f.first;
+                f.second--;
+                if(f.second > 0) pq.push(f);
+            } else {
+                int i = output.size() - 1;
+                if(output[i] == f.first) {
+                    if(pq.size() > 1) {
+                        pair<char, int> s = pq.top();
+                        pq.pop();
+                        output += s.first;
+                        s.second--;
+                        pq.push(f);
+                        if(s.second > 0) pq.push(s);
+                    } else {
+                        
+                    }
+                } else if(output[i] != f.first) {
+                    output += f.first;
+                    f.second--;
+                    if(f.second > 0) pq.push(f);
+                }
+            }
+        } 
+        cout << "Here" << endl;
+        cout << output << endl;
+    } 
     return 0;
 }
