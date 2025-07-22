@@ -2,21 +2,23 @@
 #define int long long int
 using namespace std;
 
+class graph {
+    int v;
+    list<int> * l;
+public:
+    graph(int v) {
+        this->v = v;
+        l = new list<int>[v];
+    }
+};
+
 int32_t main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
     #endif
 
-    string input = "codingminutes";
-    map<char, bool> mp;
-    for(auto x : input) {
-        if(mp[x]) {
-            cout << x << endl;
-            break;
-        }
-        mp[x] = true;
-    }
+    
 
     return 0;
 }
