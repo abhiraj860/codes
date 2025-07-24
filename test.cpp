@@ -8,7 +8,7 @@ int32_t main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    cout << "hello" << endl;
+    cout << "hello world" << endl;
 
     return 0;
 }
